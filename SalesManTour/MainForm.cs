@@ -66,6 +66,16 @@ namespace SalesManTour
                 canvas.FillEllipse(Brushes.White, rectangle);
             }
         }
+        private void DrawTowns()
+        {
+            Font font = new Font("Microsoft Sans Serif", 8);
+            canvas.DrawString("1", font, Brushes.Red, new Point(towns[0].X - 4, towns[0].Y + 3));
+            for (int i = 1; i < mapSize; ++i)
+            {
+                canvas.DrawString((i + 1).ToString(), font, Brushes.Black,
+                    new Point(towns[i].X - 5, towns[i].Y + 3));
+            }
+        }
 
         private void MainForm_ResizeEnd(object sender, EventArgs e)
         {
@@ -106,7 +116,8 @@ namespace SalesManTour
                 DrawTour(solver.Best());
                 DrawMap();
             });
-            await Task.Run(() => solver.Solve(token, progressHandler));
+            await Task.Run(() => solver.Solve(token, progressHandler)).ContinueWith(task =>
+            { Thread.Sleep(mapSize + 10); DrawTowns(); });
             stopwatch.Stop();
         }
 
