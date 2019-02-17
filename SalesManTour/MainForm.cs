@@ -57,6 +57,7 @@ namespace SalesManTour
             DrawMap();
             grbSolver.Enabled = true;
         }
+        
         private void DrawMap()
         {
             for (int i = 0; i < mapSize; ++i)
@@ -66,6 +67,7 @@ namespace SalesManTour
                 canvas.FillEllipse(Brushes.White, rectangle);
             }
         }
+        
         private void DrawTowns()
         {
             Font font = new Font("Microsoft Sans Serif", 8);
