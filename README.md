@@ -1,5 +1,5 @@
 # TravelingSalesmanProblem
-C# mulyithread program to solve TSP by evolutionary calculating
+C# multithread program to solve TSP by evolutionary calculating
 
 ## using rules:
 - download the SalesManTour sln-file and folder
