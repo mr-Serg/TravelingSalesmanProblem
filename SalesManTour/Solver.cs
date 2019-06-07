@@ -42,14 +42,14 @@ namespace SalesManTour
         // Генератор випадкових чисел потрібен для мутації турів
         private Random random;
 
-        public SSolver(int p, int m, int r, int g)
+        public SSolver(int populationSize, int mutationCount, int routeMutationCount, int maxGeneration)
         {
-            popuSize = p;
-            mutCount = m;
-            rutCount = r;
-            maxGener = g;
+            popuSize = populationSize;
+            mutCount = mutationCount;
+            rutCount = routeMutationCount;
+            maxGener = maxGeneration;
             population = new SortedDictionary<double, Tour>();
-            topTours = new KeyValuePair<double, Tour>[p];
+            topTours = new KeyValuePair<double, Tour>[populationSize];
             random = new Random();
         }
 
@@ -145,17 +145,17 @@ namespace SalesManTour
         // Для кожного потоку виконання - ОКРЕМИЙ (!) генератор
         private Random[] random;
 
-        public PSolver(int c, int p, int m, int r, int g)
+        public PSolver(int threadsCount, int populationSize, int mutationCount, int routeMutationCount, int maxGeneration)
         {
-            threadsCount = c;
-            popuSize = p;
-            mutCount = m;
-            rutCount = r;
-            maxGener = g;
+            this.threadsCount = threadsCount;
+            popuSize = populationSize;
+            mutCount = mutationCount;
+            rutCount = routeMutationCount;
+            maxGener = maxGeneration;
             population = new ConcurrentDictionary<double, Tour>();
-            topTours = new KeyValuePair<double, Tour>[p];
-            random = new Random[threadsCount];
-            for (int i = 0; i < threadsCount; ++i)
+            topTours = new KeyValuePair<double, Tour>[populationSize];
+            random = new Random[this.threadsCount];
+            for (int i = 0; i < this.threadsCount; ++i)
             {
                 // Затримки потрібні, щоб усі генератори стартували з різних значень
                 Thread.Sleep(5 + i);
