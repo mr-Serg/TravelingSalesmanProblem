@@ -1,4 +1,3 @@
 ﻿/.vs
-/SalesManTour/obj/Debug
-/SalesManTour/obj/Release
-/SalesManTour/bin/Debug
+/SalesManTour/obj/*
+/SalesManTour/bin/*

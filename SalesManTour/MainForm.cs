@@ -58,10 +58,10 @@ namespace SalesManTour
         }
         private void UpdateInterface()
         {
-            reGenCb.Enabled = !isRunning;
+            reGenCb.Enabled     = !isRunning;
             btnGenerate.Enabled = !isRunning;
-            btnStart.Enabled = towns != null && !isRunning;
-            btnStop.Enabled = isRunning;
+            btnStart.Enabled    = towns != null && !isRunning;
+            btnStop.Enabled     = isRunning;
         }
         // DRAWING
         #region DRAWING
@@ -75,9 +75,12 @@ namespace SalesManTour
         private void pnlMap_Paint(object sender, PaintEventArgs e)
         {
             Graphics canvas = e.Graphics;
+            canvas.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
 
+            // clear
             Clear(canvas);
 
+            // draw
             Tour bestTour = solver?.Best();
             if (bestTour != null)            DrawTour(canvas, bestTour);
             if (towns != null)               DrawMap(canvas);
@@ -86,6 +89,11 @@ namespace SalesManTour
         private void Clear(Graphics graphics)
         {
             graphics.Clear(Color.White);
+        }
+        private void DrawTour(Graphics canvas, Tour tour)
+        {
+            lblLength.Text = $"Довжина туру{tour.Length(),10:#.000}";
+            canvas.DrawLines(Pens.Black, tour.Route());
         }
         private void DrawMap(Graphics canvas)
         {
@@ -111,11 +119,6 @@ namespace SalesManTour
                     new Point(towns[i].X - 5, towns[i].Y + 3));
             }
         }
-        private void DrawTour(Graphics canvas, Tour t)
-        {
-            lblLength.Text = $"Довжина туру{t.Length(),10:#.000}";
-            canvas.DrawLines(Pens.Black, t.Route());
-        }
         #endregion
 
         // INTERFACE LOGIC
@@ -128,7 +131,7 @@ namespace SalesManTour
             int y = pnlMap.ClientSize.Height-10;
             int mapSize = (int)nudNumber.Value;
 
-            // create randpm towns
+            // create random towns
             towns = new Point[mapSize];
             for (int i = 0; i < towns.Length; ++i)
             {
@@ -143,9 +146,9 @@ namespace SalesManTour
             Redraw();
             UpdateInterface();
             // clear genetic algorithms result
-            lblStopwatch.Text = "Минуло";
+            lblStopwatch.Text   = "Минуло";
             lblGenerations.Text = "Перевірено 0 поколінь";
-            lblLength.Text = "Довжина туру";
+            lblLength.Text      = "Довжина туру";
         }
         
 
@@ -182,7 +185,7 @@ namespace SalesManTour
             Progress<int> progressHandler = new Progress<int>(value =>
             {
                 // .. and show it
-                lblStopwatch.Text = "Минуло " + stopwatch.Elapsed.ToString(@"mm\:ss\.ff");
+                lblStopwatch.Text   = "Минуло " + stopwatch.Elapsed.ToString(@"mm\:ss\.ff");
                 lblGenerations.Text = $"Перевірено {value} поколінь";
 
                 // do not block user interface
