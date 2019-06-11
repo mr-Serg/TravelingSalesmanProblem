@@ -50,7 +50,6 @@
             this.lblGenerations = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
             this.lblLength = new System.Windows.Forms.Label();
-            this.reGenCb = new System.Windows.Forms.CheckBox();
             this.grbTowns.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudNumber)).BeginInit();
             this.grbParameters.SuspendLayout();
@@ -64,26 +63,25 @@
             // 
             // grbTowns
             // 
-            this.grbTowns.Controls.Add(this.reGenCb);
             this.grbTowns.Controls.Add(this.btnGenerate);
             this.grbTowns.Controls.Add(this.nudNumber);
             this.grbTowns.Controls.Add(this.lblNumber);
             this.grbTowns.Location = new System.Drawing.Point(12, 12);
             this.grbTowns.Name = "grbTowns";
-            this.grbTowns.Size = new System.Drawing.Size(153, 119);
+            this.grbTowns.Size = new System.Drawing.Size(153, 83);
             this.grbTowns.TabIndex = 0;
             this.grbTowns.TabStop = false;
             this.grbTowns.Text = "Міста";
             // 
             // btnGenerate
             // 
-            this.btnGenerate.Location = new System.Drawing.Point(9, 90);
+            this.btnGenerate.Location = new System.Drawing.Point(9, 50);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(135, 23);
             this.btnGenerate.TabIndex = 2;
             this.btnGenerate.Text = "Генерувати мапу";
             this.btnGenerate.UseVisualStyleBackColor = true;
-            this.btnGenerate.Click += new System.EventHandler(this.BtnGenerate_Click);
+            this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
             // 
             // nudNumber
             // 
@@ -130,7 +128,7 @@
             this.pnlMap.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pnlMap.Location = new System.Drawing.Point(171, 12);
             this.pnlMap.Name = "pnlMap";
-            this.pnlMap.Size = new System.Drawing.Size(651, 447);
+            this.pnlMap.Size = new System.Drawing.Size(617, 426);
             this.pnlMap.TabIndex = 1;
             this.pnlMap.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMap_Paint);
             // 
@@ -144,7 +142,8 @@
             this.grbParameters.Controls.Add(this.lblMutate);
             this.grbParameters.Controls.Add(this.nudSize);
             this.grbParameters.Controls.Add(this.lblSize);
-            this.grbParameters.Location = new System.Drawing.Point(12, 137);
+            this.grbParameters.Enabled = false;
+            this.grbParameters.Location = new System.Drawing.Point(12, 101);
             this.grbParameters.Name = "grbParameters";
             this.grbParameters.Size = new System.Drawing.Size(153, 132);
             this.grbParameters.TabIndex = 2;
@@ -283,7 +282,7 @@
             this.grbSolver.Controls.Add(this.btnStop);
             this.grbSolver.Controls.Add(this.lblGenerations);
             this.grbSolver.Controls.Add(this.btnStart);
-            this.grbSolver.Location = new System.Drawing.Point(12, 275);
+            this.grbSolver.Location = new System.Drawing.Point(12, 239);
             this.grbSolver.Name = "grbSolver";
             this.grbSolver.Size = new System.Drawing.Size(153, 166);
             this.grbSolver.TabIndex = 3;
@@ -294,7 +293,7 @@
             // 
             this.nudThreads.Location = new System.Drawing.Point(105, 23);
             this.nudThreads.Maximum = new decimal(new int[] {
-            10,
+            16,
             0,
             0,
             0});
@@ -351,6 +350,7 @@
             // 
             // btnStart
             // 
+            this.btnStart.Enabled = false;
             this.btnStart.Location = new System.Drawing.Point(9, 49);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(135, 23);
@@ -362,39 +362,25 @@
             // lblLength
             // 
             this.lblLength.AutoSize = true;
-            this.lblLength.Location = new System.Drawing.Point(12, 444);
+            this.lblLength.Location = new System.Drawing.Point(12, 425);
             this.lblLength.Name = "lblLength";
             this.lblLength.Size = new System.Drawing.Size(78, 13);
             this.lblLength.TabIndex = 4;
             this.lblLength.Text = "Довжина туру";
             // 
-            // reGenCb
-            // 
-            this.reGenCb.AutoSize = true;
-            this.reGenCb.Location = new System.Drawing.Point(22, 50);
-            this.reGenCb.Name = "reGenCb";
-            this.reGenCb.Size = new System.Drawing.Size(113, 30);
-            this.reGenCb.TabIndex = 3;
-            this.reGenCb.Text = "Генерувати мапу\r\nпри зміні розміру";
-            this.reGenCb.UseVisualStyleBackColor = true;
-            this.reGenCb.CheckedChanged += new System.EventHandler(this.reGenCb_CheckedChanged);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(834, 471);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.lblLength);
             this.Controls.Add(this.grbSolver);
             this.Controls.Add(this.grbParameters);
             this.Controls.Add(this.pnlMap);
             this.Controls.Add(this.grbTowns);
-            this.MinimumSize = new System.Drawing.Size(850, 510);
             this.Name = "MainForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Тур комівояжера (генетичний алгоритм)";
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.ResizeEnd += new System.EventHandler(this.MainForm_ResizeEnd);
             this.grbTowns.ResumeLayout(false);
             this.grbTowns.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudNumber)).EndInit();
@@ -436,7 +422,6 @@
         private System.Windows.Forms.Label lblStopwatch;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown nudThreads;
-        private System.Windows.Forms.CheckBox reGenCb;
     }
 }
 
