@@ -193,7 +193,7 @@ namespace SalesManTour
             cts = new CancellationTokenSource();
             CancellationToken token = cts.Token;
             // - з його допомогою можна задати дію після завершення
-            //token.Register(UpdateUIstate);
+            token.Register(() => isSolved = true);
 
             // - створити об'єкт-інформатор, що відображатиме хід обчислень
             Progress<int> progressHandler = new Progress<int>(value =>
